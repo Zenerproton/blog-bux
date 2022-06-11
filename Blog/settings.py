@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0yoc74t^@ox(hjim5l%n)!%mut1t%fa$dd6i14kwqy&wpdp^ij
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'mainapp',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,8 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+import dj_database_url
+
 
 DATABASES = {
     'default': {
@@ -82,6 +85,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
