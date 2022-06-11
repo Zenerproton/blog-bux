@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-import dj_database_url
-# import django_heroku
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,8 +76,8 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ciba',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -139,5 +136,7 @@ EMAIL_HOST_USER = 'protonzener@gmail.com'
 EMAIL_HOST_USER_PASSWORD = 'Gravity@2001'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+import django_heroku
 
 django_heroku.settings(locals())
